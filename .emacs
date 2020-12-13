@@ -14,7 +14,7 @@
  '(display-line-numbers-type 'relative)
  '(global-display-line-numbers-mode t)
  '(package-selected-packages
-   '(evil-tutor powerline markdown-mode help use-package helm evil-visual-mark-mode)))
+   '(yaml-mode evil-tutor powerline markdown-mode help use-package helm evil-visual-mark-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -38,8 +38,13 @@
 (use-package markdown-mode
 	     :ensure t)
 
+(use-package yaml-mode
+             :ensure t)
+
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+
 (use-package powerline
-  :ensure t)
+             :ensure t)
 (powerline-default-theme)
 
 ;;; If `display-line-numbers-mode' is available (only in Emacs 26),
@@ -82,5 +87,12 @@
 (add-hook 'org-mode-hook
 	  (lambda ()
 	    (org-indent-mode t)
-	    (visual-line-mode t))
+	    (visual-line-mode t)
+	    (define-key evil-normal-state-map (kbd "C-0") 'evil-beginning-of-visual-line)
+	    (define-key evil-normal-state-map (kbd "C-h") 'evil-backward-char)
+	    (define-key evil-normal-state-map (kbd "C-l") 'evil-forward-char)
+	    (define-key evil-normal-state-map (kbd "C-j") 'evil-next-visual-line)
+	    (define-key evil-normal-state-map (kbd "C-k") 'evil-previous-visual-line))
 	  t)
+
+(setq org-startup-with-inline-images t)
