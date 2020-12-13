@@ -14,7 +14,7 @@
  '(display-line-numbers-type 'relative)
  '(global-display-line-numbers-mode t)
  '(package-selected-packages
-   '(yaml-mode evil-tutor powerline markdown-mode help use-package helm evil-visual-mark-mode)))
+   '(evil-indent-plus evil-indent-textobject evil-leader magit yaml-mode evil-tutor powerline markdown-mode help use-package helm evil-visual-mark-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -22,15 +22,48 @@
  ;; If there is more than one, they won't work right.
  )
 
-(require 'evil)
-(evil-mode t)
-
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
 (eval-when-compile
   (require 'use-package))
+
+(defun my-config-evil-leader ()
+  "Configure evil leader mode."
+  (evil-leader/set-leader ",")
+  (evil-leader/set-key
+    "," 'other-window
+    "d" 'kill-this-buffer
+    "g" 'magit-status
+    "o" 'delete-other-windows
+    "y" 'yank-to-x-clipboard))
+
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode 1)
+
+  (use-package evil-leader
+    :ensure t
+    :config
+    (global-evil-leader-mode)
+    (my-config-evil-leader))
+
+  (use-package evil-surround
+    :ensure t
+    :config
+    (global-evil-surround-mode))
+
+  (use-package evil-indent-plus
+    :ensure t
+    :config
+    (define-key evil-inner-text-objects-map "i" 'evil-indent-plus-i-indent)
+    (define-key evil-outer-text-objects-map "i" 'evil-indent-plus-a-indent)
+    (define-key evil-inner-text-objects-map "I" 'evil-indent-plus-i-indent-up)
+    (define-key evil-outer-text-objects-map "I" 'evil-indent-plus-a-indent-up)
+    (define-key evil-inner-text-objects-map "J" 'evil-indent-plus-i-indent-up-down)
+    (define-key evil-outer-text-objects-map "J" 'evil-indent-plus-a-indent-up-down)))
 
 (use-package helm
 	     :ensure t)
@@ -46,6 +79,9 @@
 (use-package powerline
              :ensure t)
 (powerline-default-theme)
+
+(use-package magit
+             :ensure t)
 
 ;;; If `display-line-numbers-mode' is available (only in Emacs 26),
 ;;; use it! Otherwise, install and run nlinum-relative.
