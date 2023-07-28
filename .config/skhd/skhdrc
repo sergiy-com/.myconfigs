@@ -2,7 +2,8 @@
 
 ####### Application Blacklists #############
 .blacklist [
-  "IntelliJ IDEA", "Telegram"
+  "IntelliJ IDEA"
+  "Telegram"
 ]
 
 # change window focus within space
