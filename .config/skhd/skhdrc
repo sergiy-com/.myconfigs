@@ -22,6 +22,7 @@ alt - n : yabai -m space --focus next
 
 # Modifying the Layout
 
+
 # rotate layout clockwise
 shift + alt - r : yabai -m space --rotate 270
 
@@ -33,6 +34,9 @@ shift + alt - x : yabai -m space --mirror x-axis
 
 # toggle window float
 shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
+
+# toggle horizontal and vertical splits
+shift + alt - v : yabai -m window --toggle split
 
 # Modifying Window Size
 
