@@ -29,7 +29,7 @@ yabai -m rule --add app="^Ivanti Secure Access Client$" manage=off
 yabai -m rule --add app="^Software Update$" manage=off
 yabai -m rule --add app="^TextExpander$" manage=off
 yabai -m rule --add app="^ABBYY Lingvo European Dictionary$" manage=off
-yabai -m rule --add app="^Telegram$" manage=off
+#yabai -m rule --add app="^Telegram$" manage=off
 yabai -m rule --add app="^1Password 7$" manage=off
 
 # IntelliJ IDEA popup https://github.com/koekeishiya/yabai/issues/1687
